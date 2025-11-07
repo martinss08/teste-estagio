@@ -24,7 +24,7 @@ class TarefaRequest extends FormRequest
         return [
             'titulo' => 'required|min:3|max:150',
             'descricao' => 'max:255',
-            // 'status' => 'required'
+            'status_id' => 'required|exists:tarefa_status,id',
         ];
     }
 
@@ -38,7 +38,7 @@ class TarefaRequest extends FormRequest
 
             'descricao.max'   => 'A descrição não pode ter mais que 250 caracteres.',
         
-            'status.required' => 'Por favor, selecione o satus'
+            'status_id.required' => 'Por favor, selecione o satus'
         ];
     }
 }
