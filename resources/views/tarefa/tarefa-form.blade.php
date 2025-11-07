@@ -1,50 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-       <form action="{{ isset($tarefaEdit) ? route('tarefa.update', $tarefaEdit->id) : route('tarefa.store') }}" method="POST">
-        @csrf
+@extends('layouts.app')
 
-        @if(isset($tarefaEdit))
-            @method('PUT')
-        @endif
-
-        <div>
-            <label>titulo</label>
-            <input type="text" name="titulo" @error('titulo') is-invalid @enderror 
-                value="{{ old('titulo', $tarefaEdit->titulo ?? '' ) }}"
-            >
-            @error('titulo')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
+@section('content')
+    <div class="w-75 mx-auto mt-5">
+        <div class="w-75  mx-auto">
+            <h1 class="text-center mt-4 mb-4 fs-1">
+                {{ isset($tarefaEdit) ? 'Editar Tarefa' : 'Criar Tarefa' }}
+            </h1>
+            <a href="/" class="btn btn-primary ms-5">
+                Voltar para Home
+            </a>
         </div>
+        
+        <div class="mx-auto my-4 p-4 border shadow rounded-3" style="width: 450px;">
+            <form action="{{ isset($tarefaEdit) ? route('tarefas.update', $tarefaEdit->id) : route('tarefas.store') }}" method="POST">
+                @csrf
+                @if (isset($tarefaEdit))
+                    @method('PUT')
+                @endif
 
-        <div>
-            <label>descrição</label>
-            <input type="text" name="descricao" @error('descricao') is-invalid @enderror 
-                value="{{ old('descricao', $tarefaEdit->descricao ?? '' ) }}"
-            >
-             @error('descricao')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
+                <div class="p-2">
+                    <label for="titulo">Título</label>
+                    <input 
+                        type="text" 
+                        name="titulo" 
+                        class="form-control @error('titulo') is-invalid @enderror" 
+                        value="{{ old('titulo', $tarefaEdit->titulo ?? '') }}"
+                    >
+                    @error('titulo')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
 
-        <div>
-            <label>status</label>
-            <select name="status">
-                <option value="pendente">Pendente</option>
-                <option value="concluida">Concluída</option>
-            </select>
-        </div>
+                <div class="p-2">
+                    <label for="descricao">Descrição</label>
+                    <textarea 
+                        name="descricao" 
+                        class="form-control @error('descricao') is-invalid @enderror"
+                    >{{ old('descricao', $tarefaEdit->descricao ?? '') }}</textarea>
 
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-    </form>
+                    @error('descricao')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="p-2">
+                    <label for="status">Status</label>
+                    <select 
+                        name="status_id" 
+                        class="form-control @error('status_id') is-invalid @enderror"
+                    >
+                        <option value="">Selecione</option>
+                        @foreach($status as $s)
+                            <option 
+                                value="{{ $s->id }}" 
+                                {{ old('status_id', $tarefaEdit->status_id ?? '') == $s->id ? 'selected' : '' }}
+                            >
+                                {{ $s->nome }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('status_id')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mt-5 mb-0 mx-auto">
+                    <button type="submit" class="btn btn-primary">
+                        {{ isset($tarefaEdit) ? 'Editar Tarefa' : 'Criar Tarefa' }}
+                    </button>
+                </div>
+            </form>
         </div>
-</body>
-</html>
+    </div>
+@endsection
