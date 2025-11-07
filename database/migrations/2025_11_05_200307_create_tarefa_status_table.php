@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tarefas', function (Blueprint $table) {
+        Schema::create('tarefa_status', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo', 150);
-            $table->text('descricao', 250)->nullable();
-            $table->foreignId('status_id')->constrained('tarefa_status')->onDelete('cascade');
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tarefas');
+        Schema::dropIfExists('tarefa_status');
     }
 };
