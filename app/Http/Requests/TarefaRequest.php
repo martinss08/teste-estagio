@@ -22,7 +22,7 @@ class TarefaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'titulo' => 'required|min:3|max:150',
+            'titulo' => 'required|min:3|max:255',
             'descricao' => 'max:255',
             'status_id' => 'required|exists:tarefa_status,id',
         ];
@@ -35,7 +35,7 @@ class TarefaRequest extends FormRequest
             'titulo.min'      => 'O título deve ter no mínimo 3 caracteres.',
             'titulo.max'      => 'O título não pode ter mais que 255 caracteres.',
 
-            'descricao.max'   => 'A descrição não pode ter mais que 250 caracteres.',
+            'descricao.max'   => 'A descrição não pode ter mais que 255 caracteres.',
         
             'status_id.required' => 'Por favor, selecione o satus'
         ];
