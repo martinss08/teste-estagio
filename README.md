@@ -1,66 +1,107 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📝 To-do List Laravet + Vue.js
+![Home](./resources/img/img-teste2.png)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+Este projeto é uma aplicação de gerenciamento de tarefas desenvolvida com Laravel (frontend via Blade), com ambiente configurado via Docker.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
+## Funcionalidades
+- CRUD de Usuario
+- CRUD de Tarefa
+#### Funcionalidades bônus
+- Barra de pesquisa, para localizar tarefas
+- Nivel de permissão
+    - Apenas o usuarios tem acesso a sua tarefas
+#### Uso do Framework 
+- **Relacionamentos:**
+    - `Tarefa` pertence a `Status` (`$tarefa->status`)
+    - `Tarefa` pertence a `User` (`$tarefa->user`)
+- **Validetions [FormRequest]**
+- **Migrations**
+- **Seeders**
+- **Soft delete:** tarefas excluídas são removidas logicamente e podem ser restauradas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Como rodar o projeto localmente
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. Clone o repositório
 
-## Learning Laravel
+```bash
+git clone https://github.com/martinss08/teste-estagio.git
+cd teste-estagio
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 2. Instale as dependências do Laravel
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Copie o arquivo de exemplo e configure o banco de dados:
+```
+cp .env.example .env
 
-## Laravel Sponsors
+* Abra .env e configure:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+## Gere a chave da aplicação
 
-### Premium Partners
+```
+php artisan key:generate
+```
+## Execute as migrations (banco de dados)
+```
+php artisan migrate
+php artisan db:seed
+```
+## Rode o projeto
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+php artisan serve
+```
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 3. Acesse o projeto
 
-## Code of Conduct
+Para acessar o projeto, acesse [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 👤 Usuário padrão (seeded)
 
-## Security Vulnerabilities
+Após rodar o proejto, você poderá acessar com:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Email:** `admin@example.com`  
+- **Senha:** `123456`
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🐞 Comandos úteis
+
+| Ação                          | Comando                                                  |
+|-------------------------------|----------------------------------------------------------|
+| Rodar o servidor local        | `php artisan serve`                                      |
+| Rodar migrations              | `php artisan migrate`                                    |
+| Rodar seeds                   | `php artisan db:seed`                                    | 
+
+---
+
+## 💡 Estrutura
+
+- `app/` –  Lógica de negócio (Laravel)
+- `resources/js/` – Scripts JS (Bootstrap ou outros)
+- `routes/` – Arquivos de rotas (web.php, console.php, etc.)
+- `database/` – Migrations, Seeders, Factories
+
+---
+
+## 📦 Tecnologias
+
+- Laravel 10+
+- Bootstrap 5
+- MySQL 
+
+---
