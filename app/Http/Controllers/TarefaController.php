@@ -73,7 +73,7 @@ class TarefaController extends Controller
 
         $status = $this->tarefaStatus->all();
 
-        return view('tarefa/tarefa-form', compact('tarefaEdit', 'status'));
+        return view('tarefa/tarefa-form', compact('tarefa', 'status'));
     }
 
     public function update($id, TarefaRequest $request)
