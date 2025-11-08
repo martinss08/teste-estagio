@@ -16,7 +16,7 @@ Este projeto é uma aplicação de gerenciamento de tarefas desenvolvida com Lar
 - **Relacionamentos:**
     - `Tarefa` pertence a `Status` (`$tarefa->status`)
     - `Tarefa` pertence a `User` (`$tarefa->user`)
-- **Validetions [FormRequest]**
+- **Validations [FormRequest]**
 - **Migrations**
 - **Seeders**
 - **Soft delete:** tarefas excluídas são removidas logicamente e podem ser restauradas
