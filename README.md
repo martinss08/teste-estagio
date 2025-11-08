@@ -9,6 +9,7 @@ Este projeto é uma aplicação de gerenciamento de tarefas desenvolvida com Lar
 - CRUD de Usuario
 - CRUD de Tarefa
 #### Funcionalidades bônus
+- Ambiente de desenvolvimento com Docker (facilita subir o projeto)
 - Barra de pesquisa, para localizar tarefas
 - Nivel de permissão
     - Apenas o usuarios tem acesso a sua tarefas
