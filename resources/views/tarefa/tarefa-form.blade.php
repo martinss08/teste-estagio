@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="w-75 mx-auto mt-5">
-        <div class="w-75  mx-auto">
+        <div class="w-100  mx-auto">
             <h1 class="text-center mt-4 mb-4 fs-1">
                 {{ isset($tarefaEdit) ? 'Editar Tarefa' : 'Criar Tarefa' }}
             </h1>
-            <a href="/" class="btn btn-primary ms-5">
+            <a href="/" class="btn btn-primary ">
                 Voltar para Home
             </a>
         </div>
