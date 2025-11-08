@@ -33,15 +33,15 @@ class UserController extends Controller
         return redirect()->route('login')->with('success', 'Usuário cadastrado com sucesso!');
     }
 
-    // Exibe o formulário de edição
     public function edit(User $user)
     {
-        return view('users.form', compact('user'));
+        return view('auth.register', compact('user'));
     }
 
-    // Atualiza o usuário
-    public function update(ProfileUpdateRequest $request, User $user)
+    public function update($id, UserRequest $request)
     {
+        $user = $this->model->findOr($id);
+
         $data = $request->validated();
 
         if (!empty($data['password'])) {
@@ -52,6 +52,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->back()->with('success', 'Usuário atualizado com sucesso!');
+         return redirect()->route('tarefas.index')
+                     ->with('success', 'Usuário atualizado com sucesso!');
     }
 }
