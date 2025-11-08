@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $userId,
-             'password' => $isEditing ? 'nullable|min:6' : 'required|min:6',
+            'password' => $isEditing ? 'nullable|min:6' : 'required|min:6',
         ];
     }
 

@@ -34,7 +34,6 @@ class TarefaRequest extends FormRequest
             'titulo.required' => 'O campo título é obrigatório.',
             'titulo.min'      => 'O título deve ter no mínimo 3 caracteres.',
             'titulo.max'      => 'O título não pode ter mais que 255 caracteres.',
-            // 'titulo.unique' => 'Este usuário já possui uma tarefa com esse título.',
 
             'descricao.max'   => 'A descrição não pode ter mais que 250 caracteres.',
         
