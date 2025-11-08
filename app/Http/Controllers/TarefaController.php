@@ -19,9 +19,14 @@ class TarefaController extends Controller
         $this->tarefaStatus = $tarefaStatus;
     }
 
-   public function index() 
+    public function index() 
     {
-        $tarefas = $this->model->with('status')->paginate(10);
+        $user = auth()->user();
+        $tarefas = $this->model
+                        ->where('user_id', $user->id)
+                        ->with('status')             
+                        ->paginate(10);             
+
         return view('welcome', ['tarefas' => $tarefas]);
     }
 
@@ -35,6 +40,8 @@ class TarefaController extends Controller
     public function store(TarefaRequest $request)
     {
         $dados = $request->validated();
+
+        $dados['user_id'] = auth()->id();
 
         $this->model->create($dados);
 
@@ -67,5 +74,34 @@ class TarefaController extends Controller
         $tarefa->delete();
 
         return redirect()->route('tarefas.index')->with('success', 'Tarefa deletada com sucesso!');
+    }
+
+    public function lixeira()
+    {
+        $user = auth()->user();
+
+        $tarefas = $this->model
+                        ->onlyTrashed()
+                        ->where('user_id', $user->id)
+                        ->with('status')
+                        ->paginate(10);
+
+        return view('tarefa.lixeira-tarefa', ['tarefas' => $tarefas]);
+    }
+
+    public function restore($id)
+    {
+        $tarefa = $this->model->onlyTrashed()->findOrFail($id);
+        $tarefa->restore();
+
+        return redirect()->route('tarefas.lixeira')->with('success', 'Tarefa restaurada com sucesso!');
+    }
+
+    public function forceDelete($id)
+    {
+        $tarefa = $this->model->onlyTrashed()->findOrFail($id);
+        $tarefa->forceDelete();
+
+        return redirect()->route('tarefas.lixeira')->with('success', 'Tarefa excluída permanentemente!');
     }
 }
