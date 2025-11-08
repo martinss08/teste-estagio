@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+
+@auth
+    <a href="{{ route('tarefas.index') }}" class="btn btn-primary">
+        Voltar para Home
+    </a>
+@endauth
 <div class="w-50 mx-auto mt-5 p-3 border rounded-3 shadow">
     <h1 class="fs-2 text-center p-2 my-3 mx-auto">
         {{ isset($user)
@@ -9,6 +15,12 @@
                 : 'Editar Usuário')
             : 'Cadastrar Usuário' }}
     </h1>
+    @if(isset($user) && $user->id === auth()->id())
+        <p class="text-center text-muted">
+            Aqui você pode atualizar suas informações pessoais, como nome, email e senha.
+        </p>
+    @endif
+    
 
     <div class="d-flex justify-content-center">
         <form action="{{ isset($user) ? route('users.update', $user->id) : route('users.store') }}"
@@ -27,7 +39,7 @@
                     @error('name') is-invalid @enderror"
                 >
                 @error('name')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="ps-5 invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -39,7 +51,7 @@
                     @error('email') is-invalid @enderror"
                 >
                 @error('email')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="ps-5 invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -54,7 +66,7 @@
                     class="w-75 mx-auto form-control @error('password') is-invalid @enderror"
                     >
                 @error('password')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="ps-5 invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -74,19 +86,4 @@
         </div>
     @endguest
 </div>
-
-<style>
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    outline: none;
-    box-shadow: none;
-    padding-left: 10px;
-    height: 35px;
-    border: none;
-    border-bottom: 1px solid #a19d9d79;
-}
-
-</style>
 @endsection

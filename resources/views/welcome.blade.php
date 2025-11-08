@@ -18,17 +18,30 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tarefa</th>
-                        <th scope="col">Data</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Data</th>
                         <th scope="col" style="margin:auto; ">Opçes</th>
                     </tr>
                 </thead>
                 <tbody>
+                     @if($tarefas->isEmpty())
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4 fs-5">
+                                Você ainda não tem tarefa cadastrada.
+                            </td>
+                        </tr>
+                    @endif
                     @foreach($tarefas as $tarefa)
                         <tr>
                             <td>{{ $tarefa->id }}</td>
                             <td>{{ $tarefa->titulo }}</td>
-                            <td>{{ $tarefa->status->nome ?? '-' }}</td>
+                            <td>
+                                <i class="bi
+                                    {{ $tarefa->status?->nome === 'Concluída' ? 'bi-check-circle text-success' : ($tarefa->status?->nome === 'Pendente' ? 'bi-x-circle text-danger' : 'bi-check-circle text-secondary') }}">
+                                </i>
+                                {{ $tarefa->status->nome ?? '-' }}
+                            </td>
+
                             <td>{{ $tarefa->created_at->format('d/m/Y') }}</td>
                         
                             <td>

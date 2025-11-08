@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mx-auto my-5 p-3 rounded"
-    style="width: 470px;margin-top:2rem ;border: 1px solid #a19d9d79; box-shadow: 0 0 5px #00000038;"
->
+<div class="mx-auto my-5 box-custom">
     <h1 class="text-center mb-4 fs-1">
         Login
     </h1>
@@ -52,19 +50,4 @@
         </a>
     </div>
 </div>
-
-
-<style>
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    outline: none;
-    box-shadow: none;
-    padding-left: 10px;
-    height: 35px;
-    border: none;
-    border-bottom: 1px solid #a19d9d79;
-}
-</style>
-
 @endsection
