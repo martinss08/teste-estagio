@@ -12,26 +12,12 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-
-
-    <style>
-        body {
-            font-family: 'Figtree', sans-serif;
-        }
-        header.header {
-            background: #4f46e5;
-        }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body class="font-sans antialiased">
     
-    <header class="header py-2">
+    <header class="header py-2 bg-purple-custom text-white">
         <div class="container d-flex justify-content-between align-items-center">
             <h1 class="logo m-0 text-white">to-do list</h1>
 
@@ -44,9 +30,12 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/">Home</a></li>
                     <li><a class="dropdown-item" href="/tarefas/create">Cadastrar tarefa</a></li>
-                    <li><a class="dropdown-item" href="/register">Cadastrar Usuário</a></li>
-                    <li><a class="dropdown-item" href="#">Lixeira</a></li>
-                    <li><a class="dropdown-item" href="#">Perfil</a></li>
+                    <li><a class="dropdown-item" href="/tarefas/lixeira">Minha lixeira</a></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('users.edit', ['user' => auth()->user()->id]) }}">
+                            Perfil
+                        </a>
+                    </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
