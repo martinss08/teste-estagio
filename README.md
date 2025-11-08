@@ -1,5 +1,5 @@
 # 📝 To-do List Laravel
-![Home](./resources/img/img-teste2.png)
+![Home](./resources/img/img-teste1.png)
 
 
 Este projeto é uma aplicação de gerenciamento de tarefas desenvolvida com Laravel (frontend via Blade), com ambiente configurado via Docker.
