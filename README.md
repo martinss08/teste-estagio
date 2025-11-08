@@ -1,4 +1,4 @@
-# 📝 To-do List Laravet + Vue.js
+# 📝 To-do List Laravel
 ![Home](./resources/img/img-teste2.png)
 
 
@@ -12,6 +12,8 @@ Este projeto é uma aplicação de gerenciamento de tarefas desenvolvida com Lar
 - Barra de pesquisa, para localizar tarefas
 - Nivel de permissão
     - Apenas o usuarios tem acesso a sua tarefas
+    - Lixeira para restaurar tarefas excluidas
+    - Uso da autenticação para proteção das rotas
 #### Uso do Framework 
 - **Relacionamentos:**
 - **Validations [FormRequest]**
