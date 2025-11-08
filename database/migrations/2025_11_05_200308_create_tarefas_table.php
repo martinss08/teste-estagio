@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('titulo', 150);
             $table->text('descricao', 250)->nullable();
             $table->foreignId('status_id')->constrained('tarefa_status')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
