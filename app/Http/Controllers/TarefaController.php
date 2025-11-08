@@ -19,15 +19,30 @@ class TarefaController extends Controller
         $this->tarefaStatus = $tarefaStatus;
     }
 
-    public function index() 
+    public function index(Request $request) 
     {
         $user = auth()->user();
-        $tarefas = $this->model
-                        ->where('user_id', $user->id)
-                        ->with('status')             
-                        ->paginate(10);             
 
-        return view('welcome', ['tarefas' => $tarefas]);
+        $query = $this->model->where('user_id', $user->id);
+
+        $statusBusca = $this->tarefaStatus->all();
+
+        if($request->input('busca')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('titulo', 'like', "%{$request->input('busca')}%");
+            });
+        }
+
+        if($request->input('status')) {
+             $query->where('status_id', $request->input('status'));
+        }
+
+        $tarefas = $query->paginate(10);  
+
+        return view('welcome', [
+            'tarefas' => $tarefas,
+            'statusBusca' => $statusBusca
+        ]);
     }
 
     public function create()
