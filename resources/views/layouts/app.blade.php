@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <script src="{{ asset('js/alerts.js') }}"></script>
 </head>
 
 <body class="font-sans antialiased">
@@ -53,15 +54,14 @@
     </header>
     
 
-    <div class="container-fluid mt-3">
+   <div class="container-fluid">
         @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show text-center w-100" role="alert">
+            <div class="alert alert-success alert-dismissible fade show text-center w-100 fs-5" role="alert">
                 {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
             </div>
         @endif
     </div>
-
+    
     <main class="container my-4">
         @yield('content')
     </main>
