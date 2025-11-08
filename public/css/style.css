@@ -1,0 +1,27 @@
+body {
+    font-family: 'Figtree', sans-serif;
+}
+
+.bg-purple-custom {
+    background-color: #4f46e5;
+}
+    
+input.form-control[type="text"],
+input.form-control[type="email"],
+input.form-control[type="password"] {
+    outline: none !important;
+    box-shadow: none !important;
+    padding-left: 10px !important;
+    height: 35px !important;
+    border: none !important;
+    border-bottom: 1px solid #a19d9d79 !important;
+}
+
+.box-custom {
+    width: 470px;
+    margin: 2rem auto 0 auto; 
+    padding: 1rem;
+    border: 1px solid #a19d9d79;
+    box-shadow: 0 0 5px #00000038;
+    border-radius: 0.25rem;
+}
