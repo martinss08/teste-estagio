@@ -9,8 +9,11 @@ Route::get('/', [TarefaController::class, 'index'])
     ->middleware('auth')
     ->name('tarefas.index');
 
-
 Route::middleware('auth')->group(function () {
+    Route::get('/tarefas/lixeira', [TarefaController::class, 'lixeira'])->name('tarefas.lixeira');
+    Route::patch('/tarefas/{id}/restore', [TarefaController::class, 'restore'])->name('tarefas.restore');
+    Route::delete('/tarefas/{id}/force-delete', [TarefaController::class, 'forceDelete'])->name('tarefas.forceDelete');
+
     Route::resource('tarefas', TarefaController::class);
 });
 
