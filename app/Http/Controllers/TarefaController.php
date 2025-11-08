@@ -65,15 +65,15 @@ class TarefaController extends Controller
 
     public function edit($id)
     {
-        $tarefa = $this->model->where('user_id', auth()->user()->id)->find($id);
+        $tarefaEdit = $this->model->where('user_id', auth()->user()->id)->find($id);
 
-        if(!$tarefa) {
+        if(!$tarefaEdit) {
             return redirect()->route('tarefas.index')->with('error', 'Tarefa não encontrada ou você não tem permissão para edita-la.');
         }
 
         $status = $this->tarefaStatus->all();
 
-        return view('tarefa/tarefa-form', compact('tarefa', 'status'));
+        return view('tarefa/tarefa-form', compact('tarefaEdit', 'status'));
     }
 
     public function update($id, TarefaRequest $request)
