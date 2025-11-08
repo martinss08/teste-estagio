@@ -54,10 +54,15 @@
     </header>
     
 
-   <div class="container-fluid">
+   <div class="container-fluid alert-custom">
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show text-center w-100 fs-5" role="alert">
                 {{ session('success') }}
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show text-center w-100 fs-5" role="alert">
+                {{ session('error') }}
             </div>
         @endif
     </div>

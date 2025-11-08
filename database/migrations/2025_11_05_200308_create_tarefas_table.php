@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('descricao', 255)->nullable();
             $table->foreignId('status_id')->constrained('tarefa_status')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

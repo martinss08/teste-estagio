@@ -65,7 +65,12 @@ class TarefaController extends Controller
 
     public function edit($id)
     {
-        $tarefaEdit = $this->model->find($id);
+        $tarefa = $this->model->where('user_id', auth()->user()->id)->find($id);
+
+        if(!$tarefa) {
+            return redirect()->route('tarefas.index')->with('error', 'Tarefa não encontrada ou você não tem permissão para edita-la.');
+        }
+
         $status = $this->tarefaStatus->all();
 
         return view('tarefa/tarefa-form', compact('tarefaEdit', 'status'));
@@ -73,7 +78,12 @@ class TarefaController extends Controller
 
     public function update($id, TarefaRequest $request)
     {
-        $tarefa = $this->model->find($id);
+        $tarefa = $this->model->where('user_id', auth()->user()->id)->find($id);
+
+        if(!$tarefa) {
+            return redirect()->route('tarefas.index')->with('error', 'Tarefa não encontrada ou você não tem permissão para edita-la.');
+        }
+
 
         $dados = $request->validated();
 
@@ -84,7 +94,11 @@ class TarefaController extends Controller
 
     public function destroy($id) 
     {
-        $tarefa = $this->model->find($id);
+        $tarefa = $this->model->where('user_id', auth()->user()->id)->find($id);
+
+        if(!$tarefa) {
+            return redirect()->route('tarefas.index')->with('error', 'Tarefa não encontrada ou você não tem permissão para deletá-la.');
+        }
 
         $tarefa->delete();
 
@@ -106,7 +120,13 @@ class TarefaController extends Controller
 
     public function restore($id)
     {
-        $tarefa = $this->model->onlyTrashed()->findOrFail($id);
+        $tarefa = $this->model->onlyTrashed()->where('user_id', auth()->user()->id)->find($id);
+
+        if(!$tarefa) {
+            return redirect()->route('tarefas.index')->with('error', 'Tarefa não encontrada ou você não tem permissão para restaura-la.');
+        }
+
+
         $tarefa->restore();
 
         return redirect()->route('tarefas.lixeira')->with('success', 'Tarefa restaurada com sucesso!');
@@ -114,7 +134,11 @@ class TarefaController extends Controller
 
     public function forceDelete($id)
     {
-        $tarefa = $this->model->onlyTrashed()->findOrFail($id);
+        $tarefa = $this->model->onlyTrashed()->where('user_id', auth()->user()->id)->find($id);
+
+        if(!$tarefa) {
+            return redirect()->route('tarefas.index')->with('error', 'Tarefa não encontrada ou você não tem permissão para exclui-la.');
+        }
         $tarefa->forceDelete();
 
         return redirect()->route('tarefas.lixeira')->with('success', 'Tarefa excluída permanentemente!');
